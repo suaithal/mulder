@@ -71,6 +71,12 @@ pipeline {
             // promote through all 'Auto' promotion Environments
             sh "jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)"
           }
+          dir('/home/jenkins/go/src/github.com/suaithal/mulder/charts/mulder'){
+            sh "jx step helm build"
+          }
+          dir('/home/jenkins/go/src/github.com/suaithal/mulder/charts/mulder'){
+            sh "make preview"
+          }
         }
       }
     }
